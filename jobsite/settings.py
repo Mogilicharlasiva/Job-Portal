@@ -11,10 +11,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import environ
+
+env = environ.Env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+environ.Env.read_env(os.path.join(BASE_DIR, "secretes.env"))
+MONGO_CONNECTION_STRING = env("MONGO_CONNECTION_STRING")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -89,7 +95,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'jobs',
         'CLIENT': {
-            'host': 'mongodb+srv://mogilicharlasiva:OUPswd8112@cluster0.kkg2q.mongodb.net/',
+            'host': MONGO_CONNECTION_STRING,
         }
     }
 }
