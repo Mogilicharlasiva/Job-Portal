@@ -1,4 +1,4 @@
-**Implementing Persistent and Retroactive Data Structures Using Queues**
+*Implementing Persistent and Retroactive Data Structures Using Queues*
 
 Welcome to our git repository for persistent and retroactive queues!
 
