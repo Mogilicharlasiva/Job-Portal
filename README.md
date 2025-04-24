@@ -4,11 +4,11 @@ Welcome to our git repository for persistent and retroactive queues!
 
 **Why Did We Undergo This Project?**
 
-Well, traditional queue implementations follow the FIFO (First-In-First-Out) principle and are inherently ephemeral (and it’s also a perfect opportunity to apply the theory we have seen in class).
+Well, traditional queue implementations follow the FIFO (First-In-First-Out) principle and are inherently ephemeral (and it's also a perfect opportunity to apply the theory we have seen in class).
 
-Once an operation is executed, its effect becomes permanent and there's no way to "look back" or "modify the past".
-
-So in this project we attempted to introduce persistence and retroactivity to queue-based systems specifically (**+ **an attempt for persistent stacks).
+Once an operation is executed, its effect becomes permanent and there\'s no way to \"look back\" or \"modify the past\".\
+\
+So in this project we attempted to introduce persistence and retroactivity to queue-based systems specifically (**+** an attempt for persistent stacks).
 
 And eventually, we apply them to a banking system where versioning and historical accuracy are critical.
 
@@ -16,361 +16,387 @@ And eventually, we apply them to a banking system where versioning and historica
 
 **Persistence**
 
-**Partial Persistence**: You can **query** any previous version of a queue (e.g., get balances at timestamp t), but you can only **insert new operations at the latest version**.
+-   **Partial Persistence**: You can **query** any previous version of a queue (e.g., get balances at timestamp t), but you can only **insert new operations at the latest version**.
 
-**Full Persistence**: You can **query and update **any version of the queue. Allows branching versions.
+-   **Full Persistence**: You can **query and update** any version of the queue. Allows branching versions.
 
 **Retroactivity**
 
-**Partial Retroactivity**: You can insert or delete past operations, but only observe their effect **on the latest state**.
+-   **Partial Retroactivity**: You can insert or delete past operations, but only observe their effect **on the latest state**.
 
-**Full Retroactivity**: You can insert or delete past operations and also **query any past version** as if history was always that way.
+-   **Full Retroactivity**: You can insert or delete past operations and also **query any past version** as if history was always that way.
 
 **Useful Resources**
 
-**The Repository’s Structure**
+[[https://courses.csail.mit.edu/6.851/fall17/scribe/lec1.pdf]{.underline}](https://courses.csail.mit.edu/6.851/fall17/scribe/lec1.pdf)
+
+[[https://erikdemaine.org/papers/Retroactive\_TALG/paper.pdf]{.underline}](https://erikdemaine.org/papers/Retroactive_TALG/paper.pdf)
+
+**The Repository's Structure**
 
 Our repo has different folders and files as follows:
 
 Files:
 
-**PersistentQueue.java** and **Client.java** go together and are under the same package Partial_persistance_Queues
+-   **PersistentQueue.java** and **Client.java** go together and are under the same package Partial\_persistance\_Queues
 
-FullPersistenQueue.py
+-   FullPersistenQueue.py
 
-FullRetroactivityNoPersistenceQueue.py
+-   FullRetroactivityNoPersistenceQueue.py
 
-FullRetroactivityQueue.py
+-   FullRetroactivityQueue.py
 
-ModifiedPersistentRetroactiveQueue.py
+-   ModifiedPersistentRetroactiveQueue.py
 
-ModifiedPersistentRetroactiveQueueMerge.py
+-   ModifiedPersistentRetroactiveQueueMerge.py
 
-ModifiedPersistentRetroactiveQueueVersions.py
+-   ModifiedPersistentRetroactiveQueueVersions.py
 
-PartialPersistenceQueue.py
+-   PartialPersistenceQueue.py
 
-PartialRetroactivityQueue.py
+-   PartialRetroactivityQueue.py
 
 Folders:
 
-Partial_Persistance_Stacks/
+-   Partial\_Persistance\_Stacks/
 
-persistent_retroactive_transactions/
+-   persistent\_retroactive\_transactions/
 
-# Persistent Queue in Java
+**Persistent Queue in Java**
+============================
 
 The persistence is **partial**, meaning you can access and print any previous version, but modifications are only applied to the latest one. Each operation (enqueue/dequeue) increments the version count, maintaining a copy of the queue at that point in time.
 
-**PersistentQueue.java **has the core data structure implementation.
+**PersistentQueue.java** has the core data structure implementation.
 
 **Client.java** is a sample driver code to demonstrate usage.
 
 **Features**
 
-### PersistentQueue<T>
+### **PersistentQueue\<T\>**
 
 This generic class supports the following operations:
 
-**enqueue(T value)
-**
+-   **enqueue(T value)\
+    > **
 
-Adds an element to the end of the queue.
+    -   Adds an element to the end of the queue.
 
-Creates a new version of the queue.
+    -   Creates a new version of the queue.
 
-**dequeue()
-**
+-   **dequeue()\
+    > **
 
-Removes the element at the front of the queue.
+    -   Removes the element at the front of the queue.
 
-Creates a new version.
+    -   Creates a new version.
 
-Handles empty queues.
+    -   Handles empty queues.
 
-printQueue(int version)
+-   printQueue(int version)
 
-Prints the queue content at a specific version.
+    -   Prints the queue content at a specific version.
 
-If the version doesn't exist, a warning is shown.
+    -   If the version doesn\'t exist, a warning is shown.
 
-getCurrentVersion()
+-   getCurrentVersion()
 
-Returns the latest version number of the queue.
+    -   Returns the latest version number of the queue.
 
-### Client
+### **Client**
 
-Demonstrates the usage of PersistentQueue by performing a sequence of operations.
+-   Demonstrates the usage of PersistentQueue by performing a sequence of operations.
 
-Useful for testing and understanding the behavior of the persistent queue.
+-   Useful for testing and understanding the behavior of the persistent queue.
 
-## Requirements
+**Requirements**
+----------------
 
-**Java 8 or higher
-**
+-   **Java 8 or higher\
+    > **
 
-No external libraries or frameworks needed but you can use a Java IDE of your preference.
+-   No external libraries or frameworks needed but you can use a Java IDE of your preference.
 
-## Running the Project
+**Running the Project**
+-----------------------
 
 **Clone the Repository**
 
-git clone
+git clone [[https://github.com/Abhijeet399/Project\_ADS\_Persistance\_Retroactive.git]{.underline}](https://github.com/Abhijeet399/Project_ADS_Persistance_Retroactive.git)
 
-**Compile both Java files**:
+**Compile both Java files**:\
+\
+javac Partial\_persistance\_Queues/PersistentQueue.java Partial\_persistance\_Queues/Client.java
 
-javac Partial_persistance_Queues/PersistentQueue.java Partial_persistance_Queues/Client.java
+**Run the main program**:\
+\
+java Partial\_persistance\_Queues.Client
 
-**Run the main program**:
+### 
 
-java Partial_persistance_Queues.Client
+### **Partial Persistence Queue in Python**
 
-### Partial Persistence Queue in Python
-
-**
+**\
 **This program is the same as the Java version and shows a **partially persistent queue**. In this version, modifications (enqueue and dequeue) can only be made at the **latest version**, but you can access and view any previous version of the queue at any time.
 
 **Features**
 
-**enqueue(value)**
-Adds a new value to the end of the queue and creates a new version.
+-   **enqueue(value)**\
+    > Adds a new value to the end of the queue and creates a new version.
 
-**dequeue()**
-Removes the element from the front of the queue (if not empty) and creates a new version.
+-   **dequeue()**\
+    > Removes the element from the front of the queue (if not empty) and creates a new version.
 
-**getLatestQueue()**
-Returns the queue at the current (latest) version.
+-   **getLatestQueue()**\
+    > Returns the queue at the current (latest) version.
 
-**printQueue(version)**
-Prints the state of the queue at a specified version. If the version doesn’t exist, it prints a warning.
+-   **printQueue(version)**\
+    > Prints the state of the queue at a specified version. If the version doesn't exist, it prints a warning.
 
 **Requirements**
 
-Python 3.6 or higher
+-   Python 3.6 or higher
 
-Uses only Python standard features, no extra packages required
+-   Uses only Python standard features, no extra packages required
 
-## Running the Program
+**Running the Program**
+-----------------------
 
 Save the script (via git clone or manual save) and run it directly:
 
 python3 PartialPersistenceQueue.py
 
-### Partial Retroactivity Queue
+### **Partial Retroactivity Queue**
 
 This program implements a **Partially Retroactive Queue**. It allows inserting enqueue or dequeue operations not only at the end of the operation timeline, but also at **any point in the past**. After each change, the queue is rebuilt to reflect the retroactive effect.
 
 **Features**
 
-**enqueue(value, t=None)
-**Inserts the given value into the queue. If t is not provided, it adds the operation at the end of the current timeline.
+-   **enqueue(value, t=None)\
+    > **Inserts the given value into the queue. If t is not provided, it adds the operation at the end of the current timeline.
 
-**dequeue(t=None)**
-Removes the element at the front of the queue. If t is not provided, it dequeues at the end of the current timeline. Otherwise, it applies the dequeue at the specified timestamp.
+-   **dequeue(t=None)**\
+    > Removes the element at the front of the queue. If t is not provided, it dequeues at the end of the current timeline. Otherwise, it applies the dequeue at the specified timestamp.
 
-**insert_operation(op_type, value, t)**
- Internal method to insert either enqueue or dequeue operation into the operations list. Maintains timestamp and order.
+-   **insert\_operation(op\_type, value, t)**\
+    > Internal method to insert either enqueue or dequeue operation into the operations list. Maintains timestamp and order.
 
-**build_queue()**
-Rebuilds the queue from scratch using the sorted list of operations.
+-   **build\_queue()**\
+    > Rebuilds the queue from scratch using the sorted list of operations.
 
-**getLatestQueue()**
-Returns the most recent state of the queue after applying all retroactive operations.
+-   **getLatestQueue()**\
+    > Returns the most recent state of the queue after applying all retroactive operations.
 
 **Requirements**
 
-Python 3.6 or above
+-   Python 3.6 or above
 
-No third-party libraries needed
+-   No third-party libraries needed
 
-## Running the Program
+**Running the Program**
+-----------------------
 
 Save the script (via git clone or manual save) and run it directly:
 
 python3 PartialRetroactivityQueue.py
 
-# (Somewhat) Full Persistent Queue in Python
+**(Somewhat) Full Persistent Queue in Python**
+==============================================
 
-This Python implementation demonstrates an almost fully persistent queue, a data structure where every version is immutable and can serve as the base for new versions which can  allow us to branch histories and logical timestamp allows multiple versions to coexist. Note that the UUIDs are dynamically generated, so they'll differ each time you run the code.
+This Python implementation demonstrates an almost fully persistent queue, a data structure where every version is immutable and can serve as the base for new versions which can allow us to branch histories and logical timestamp allows multiple versions to coexist. Note that the UUIDs are dynamically generated, so they\'ll differ each time you run the code.
 
 The file contains the full implementation and usage demo.
 
-## Features
+**Features**
+------------
 
-### FullPersistenceQueue
+### **FullPersistenceQueue**
 
 This class implements the following functionality:
 
-Each version is uniquely identified using a UUID.
+-   Each version is uniquely identified using a UUID.
 
-Versions are stored with a logical timestamp, parent version, and the queue's state.
+-   Versions are stored with a logical timestamp, parent version, and the queue\'s state.
 
-Version history can branch at any point.
+-   Version history can branch at any point.
 
-**enqueue(value, timestamp=None, base_version=None)
-**
+```{=html}
+<!-- -->
+```
+-   **enqueue(value, timestamp=None, base\_version=None)\
+    > **
 
-Adds an element to the end of the queue.
+    -   Adds an element to the end of the queue.
 
-Creates a new version ID.
+    -   Creates a new version ID.
 
-Supports specifying a custom base version and timestamp, enabling branching.
+    -   Supports specifying a custom base version and timestamp, enabling branching.
 
-**dequeue(timestamp=None, base_version=None)
-**
+-   **dequeue(timestamp=None, base\_version=None)\
+    > **
 
-Removes the element at the front of the queue.
+    -   Removes the element at the front of the queue.
 
-Creates a new version ID from a specified base version.
+    -   Creates a new version ID from a specified base version.
 
-Also handles empty queues.
+    -   Also handles empty queues.
 
-**print_queue(version_id=None)
-**
+-   **print\_queue(version\_id=None)\
+    > **
 
-Prints the queue contents at a specific version.
+    -   Prints the queue contents at a specific version.
 
-If no version is given, defaults to the latest version.
+    -   If no version is given, defaults to the latest version.
 
-**get_queue_by_version(version_id)
-**
+-   **get\_queue\_by\_version(version\_id)\
+    > **
 
-Returns the queue as a list for the given version ID.
+    -   Returns the queue as a list for the given version ID.
 
-**get_versions_at_timestamp(timestamp)
-**
+-   **get\_versions\_at\_timestamp(timestamp)\
+    > **
 
-Returns a list of all version IDs associated with a given logical timestamp.
+    -   Returns a list of all version IDs associated with a given logical timestamp.
 
-## Requirements
+**Requirements**
+----------------
 
-**Python 3.6+
-**
+-   **Python 3.6+\
+    > **
 
-Uses built-in uuid and copy functionality. No external libraries are required.
+-   Uses built-in uuid and copy functionality. No external libraries are required.
 
-## Running the Program
+**Running the Program**
+-----------------------
 
 **Clone the repo (or save the file)**
 
-git clone
+git clone [[https://github.com/Abhijeet399/Project\_ADS\_Persistance\_Retroactive.git]{.underline}](https://github.com/Abhijeet399/Project_ADS_Persistance_Retroactive.git)
 
-**Run it**:
-
+**Run it**:\
+\
 python FullPersistenceQueue.py
 
-# Fully Retroactive Queue (No Persistence)
+**Fully Retroactive Queue (No Persistence)**
+============================================
 
 This Python implementation demonstrates a **fully retroactive queue** that allows insertion and deletion operations to be performed at **any past timestamp**, with all future versions automatically updated to reflect the change. However, it **does not preserve historical branches**, meaning each timestamp points to only one canonical version of the queue.
 
-=> Retroactive edits can alter the state of the queue at future timestamps and versions are not immutable so the structure reflects only one version per timestamp.
+=\> Retroactive edits can alter the state of the queue at future timestamps and versions are not immutable so the structure reflects only one version per timestamp.
 
-## Features
+**Features**
+------------
 
-### FullRetroactivityNoPersistenceQueue
+### **FullRetroactivityNoPersistenceQueue**
 
 This class supports the following operations:
 
-**enqueue(value, timestamp=None)
-**
+-   **enqueue(value, timestamp=None)\
+    > **
 
-Adds an element to the queue at a specific timestamp.
+    -   Adds an element to the queue at a specific timestamp.
 
-All following timestamps are updated automatically.
+    -   All following timestamps are updated automatically.
 
-Defaults to appending at the latest version if no timestamp is provided.
+    -   Defaults to appending at the latest version if no timestamp is provided.
 
-**dequeue(timestamp=None)
-**
+-   **dequeue(timestamp=None)\
+    > **
 
-Removes the front element of the queue at the given timestamp.
+    -   Removes the front element of the queue at the given timestamp.
 
-Like enqueue, updates all future versions accordingly.
+    -   Like enqueue, updates all future versions accordingly.
 
-**printQueue(timestamp)
-**
+-   **printQueue(timestamp)\
+    > **
 
-Prints the queue contents at the given timestamp.
+    -   Prints the queue contents at the given timestamp.
 
-Handles nonexistent timestamps gracefully.
+    -   Handles nonexistent timestamps gracefully.
 
-**getQueueAtTimestamp(timestamp)
-**
+-   **getQueueAtTimestamp(timestamp)\
+    > **
 
-Retrieves the queue as it was at or before the given timestamp.
+    -   Retrieves the queue as it was at or before the given timestamp.
 
-### Design Characteristics
+### **Design Characteristics**
 
-**Fully Retroactive**: You can insert or remove operations *in the past*.
+-   **Fully Retroactive**: You can insert or remove operations *in the past*.
 
-**No Persistence**: Changes overwrite history so only the latest version of each timestamp is maintained.
+-   **No Persistence**: Changes overwrite history so only the latest version of each timestamp is maintained.
 
-**Deterministic Updates**: Retroactive changes immediately affect all future versions.
+-   **Deterministic Updates**: Retroactive changes immediately affect all future versions.
 
-## Requirements
+**Requirements**
+----------------
 
-**Python 3.6+
-**
+-   **Python 3.6+\
+    > **
 
-Pure Python, no external libraries required.
+-   Pure Python, no external libraries required.
 
-## Running the Program
+**Running the Program**
+-----------------------
 
 **Clone the repository (or save the file)**
 
-git clone
+git clone [[https://github.com/Abhijeet399/Project\_ADS\_Persistance\_Retroactive.git]{.underline}](https://github.com/Abhijeet399/Project_ADS_Persistance_Retroactive.git)
 
-**Run it**:
-
+**Run it**:\
+\
 python FullRetroactivityNoPersistenceQueue.py
 
-# Fully Retroactive Queue (Operation-Based History)
+**Fully Retroactive Queue (Operation-Based History)**
+=====================================================
 
 This Python implementation showcases a **fully retroactive queue** that keeps a complete list of enqueue and dequeue operations along with their timestamps. You can insert or delete any operation at **any point in time**, and reconstruct the queue at any moment based on the sorted history of operations.
 
 The queue maintains a full list of all operations and their timestamps. When a queue needs to be inspected at time t, all operations are sorted and replayed up to that point: first by timestamp, then prioritizing enqueue over dequeue for correct sequencing. Note that no persistence model is used so this is an in-memory operation log.
 
-## Features
+**Features**
+------------
 
 A fully retroactive queue with full operation logging and rebuild-on-demand behavior.
 
-**enqueue(value, timestamp=None)
-**
+-   **enqueue(value, timestamp=None)\
+    > **
 
-Inserts a value at the specified timestamp.
+    -   Inserts a value at the specified timestamp.
 
-Defaults to the next available timestamp if none is given.
+    -   Defaults to the next available timestamp if none is given.
 
-**dequeue(timestamp=None)
-**
+-   **dequeue(timestamp=None)\
+    > **
 
-Removes the front element from the queue at the given timestamp.
+    -   Removes the front element from the queue at the given timestamp.
 
-Like enqueue, defaults to the next timestamp if not specified.
+    -   Like enqueue, defaults to the next timestamp if not specified.
 
-**build_queue_at(t)
-**
+-   **build\_queue\_at(t)\
+    > **
 
-Rebuilds the queue up to a specific timestamp using a sorted list of operations.
+    -   Rebuilds the queue up to a specific timestamp using a sorted list of operations.
 
-**printQueue(t=None)
-**
+-   **printQueue(t=None)\
+    > **
 
-Displays the queue at the provided timestamp (defaults to latest).
+    -   Displays the queue at the provided timestamp (defaults to latest).
 
-**printListOfOps()
-**
+-   **printListOfOps()\
+    > **
 
-Prints a numbered list of all enqueues and dequeues with their timestamps.
+    -   Prints a numbered list of all enqueues and dequeues with their timestamps.
 
-## Requirements
+**Requirements**
+----------------
 
-**Python 3.6+
-**
+-   **Python 3.6+\
+    > **
 
-No third-party dependencies. Runs with the standard library.
+-   No third-party dependencies. Runs with the standard library.
 
-## Running the Program
+**Running the Program**
+-----------------------
 
 Save the script (via git clone or manual save) and run it directly:
 
@@ -378,7 +404,8 @@ python FullRetroactivityQueue.py
 
 It will output a step-by-step demonstration of how the queue evolves through retroactive operations.
 
-# Modified Persistent Retroactive Queue
+**Modified Persistent Retroactive Queue** 
+=========================================
 
 This is a more complex implementation of a **retroactive queue** using **linked timestamp nodes**, with support for **persistent** tracking of enqueue and dequeue modifications.
 
@@ -386,57 +413,58 @@ Each operation is stored at its respective timestamp node, and all nodes are lin
 
 Each timestamp is represented as a Node that contains:
 
-A list of enqueue operations performed at that time.
+-   A list of enqueue operations performed at that time.
 
-A list of dequeue operations (which remove the front of the queue as seen *before* that timestamp).
+-   A list of dequeue operations (which remove the front of the queue as seen *before* that timestamp).
 
-**Forward and backward pointers** to maintain a temporal linked structure (think of it as a timeline where each moment can influence future or past states).
+-   **Forward and backward pointers** to maintain a temporal linked structure (think of it as a timeline where each moment can influence future or past states).
 
 This approach allows:
 
-Retroactive edits at *any* point in time.
+-   Retroactive edits at *any* point in time.
 
-Efficient state rebuilding up to a given timestamp.
+-   Efficient state rebuilding up to a given timestamp.
 
-Easy traversal of time through bidirectional links.
+-   Easy traversal of time through bidirectional links.
 
 However, please note that:
 
-This is **not purely persistent** in a functional programming sense: it mutates state but maintains temporal fidelity through structure.
+-   This is **not purely persistent** in a functional programming sense: it mutates state but maintains temporal fidelity through structure.
 
-Bidirectional pointers make it extensible for features like *range queries*, *time intervals*, and *branching versions*.
+-   Bidirectional pointers make it extensible for features like *range queries*, *time intervals*, and *branching versions*.
 
 **Features**
 
-**enqueue(value, timestamp=None)
-**
+-   **enqueue(value, timestamp=None)\
+    > **
 
-Enqueues a value at a specific time. Defaults to the next available version.
+    -   Enqueues a value at a specific time. Defaults to the next available version.
 
-**dequeue(timestamp=None)
-**
+-   **dequeue(timestamp=None)\
+    > **
 
-Records a dequeue operation at the given time, based on the queue state up to that point.
+    -   Records a dequeue operation at the given time, based on the queue state up to that point.
 
-Removes the front of the queue if not empty.
+    -   Removes the front of the queue if not empty.
 
-**get_state_at_timestamp(timestamp)
-**
+-   **get\_state\_at\_timestamp(timestamp)\
+    > **
 
-Reconstructs the queue as it would exist at a specific timestamp.
+    -   Reconstructs the queue as it would exist at a specific timestamp.
 
-**print_queue_structure()
-**
+-   **print\_queue\_structure()\
+    > **
 
-Prints the internal structure, including enqueue/dequeue mods and forward/backward time links.
+    -   Prints the internal structure, including enqueue/dequeue mods and forward/backward time links.
 
-## Running the Program
+**Running the Program**
+-----------------------
 
 Save the script (via git clone or manual save) and run it directly:
 
 python3 ModifiedPersistentRetroactiveQueue.py
 
-### Modified Persistent Retroactive Queue with Version Control
+### **Modified Persistent Retroactive Queue with Version Control**
 
 This program implements a **Modified Persistent Retroactive Queue** with a more detailed and advanced structure. It uses **timestamped nodes** to record operations and build queue state over time. It supports both **persistent** and **retroactive** features, with the ability to trace or reconstruct the queue state at specific **timestamps or versions**.
 
@@ -444,136 +472,138 @@ Similar to the preceding implementation it allows enqueue and dequeue at any spe
 
 **Features**
 
-**_get_or_create_node(timestamp)**
-Returns the existing node at timestamp, or creates a new one while maintaining forward/back pointers to adjacent nodes.
+-   **\_get\_or\_create\_node(timestamp)**\
+    > Returns the existing node at timestamp, or creates a new one while maintaining forward/back pointers to adjacent nodes.
 
-**enqueue(value, timestamp=None)**
-Inserts a value at the specified timestamp. If not provided, the current version timestamp is used.
+-   **enqueue(value, timestamp=None)**\
+    > Inserts a value at the specified timestamp. If not provided, the current version timestamp is used.
 
-**dequeue(timestamp=None)**
-Removes the front element at the specified timestamp. Uses queue state before that time to determine what to remove.
+-   **dequeue(timestamp=None)**\
+    > Removes the front element at the specified timestamp. Uses queue state before that time to determine what to remove.
 
-**get_state_at_timestamp(timestamp)**
-Returns the queue’s state after applying all modifications up to the given timestamp.
+-   **get\_state\_at\_timestamp(timestamp)**\
+    > Returns the queue's state after applying all modifications up to the given timestamp.
 
-**get_state_at_version(version_number)**
-Returns the state of the queue after a specific operation version.
+-   **get\_state\_at\_version(version\_number)**\
+    > Returns the state of the queue after a specific operation version.
 
-**print_queue_structure()**
-Debug function to show internal node data, modifications, and pointers for each timestamped node.
+-   **print\_queue\_structure()**\
+    > Debug function to show internal node data, modifications, and pointers for each timestamped node.
 
 **Requirements**
 
-Python 3.6+
+-   Python 3.6+
 
-Uses the following standard libraries:
+-   Uses the following standard libraries:
 
-bisect for efficient sorted insertions
+    -   bisect for efficient sorted insertions
 
-collections.deque for fast front-element removals
+    -   collections.deque for fast front-element removals
 
-copy for deep-copying node state
+    -   copy for deep-copying node state
 
-## Running the Program
+**Running the Program**
+-----------------------
 
 Save the script (via git clone or manual save) and run it directly:
 
 python3 ModifiedPersistentRetroactiveQueueVersions.py
 
-# Partial Persistence Stacks (Java)
+**Partial Persistence Stacks (Java)**
+=====================================
 
 This project implements a **partially persistent stack** in Java, allowing users to access past versions of the stack while continuing to make changes in the present. It supports operations like push, pop, and viewing the state of the stack at any previous version. The persistent nature of the stack is managed internally using versioned references.
 
-## Methods
+**Methods**
+-----------
 
-### push(T data)
-Adds an element to the top of the stack and saves the new version.
+-   ### **push(T data)** Adds an element to the top of the stack and saves the new version.
 
-### pop()
-Removes and returns the top element from the stack, creating a new version afterward.
+-   ### **pop() **Removes and returns the top element from the stack, creating a new version afterward.
 
-### copyStack(Node<T> top)
-Creates a deep copy of the stack starting from the given top node. Used to persist past versions.
+-   ### **copyStack(Node\<T\> top) **Creates a deep copy of the stack starting from the given top node. Used to persist past versions.
 
-### makePersistent(T data)
-Creates a new Persistance_Stacks object based on the current stack, pushes the new data, and returns the new stack.
+-   ### **makePersistent(T data) **Creates a new Persistance\_Stacks object based on the current stack, pushes the new data, and returns the new stack.
 
-### getVersion(int version)
-Returns the top node of the stack at the specified version number.
+-   ### **getVersion(int version) **Returns the top node of the stack at the specified version number.
 
-### printStack(Node<T> top)
-Prints the contents of the stack from the given top node down to the bottom.
+-   ### **printStack(Node\<T\> top) **Prints the contents of the stack from the given top node down to the bottom.
 
-## Requirements
+**Requirements**
+----------------
 
-Java Development Kit (JDK) 8 or higher
+-   Java Development Kit (JDK) 8 or higher
 
-## How to Run
+**How to Run**
+--------------
 
-git clone
+-   git clone [[https://github.com/Abhijeet399/Project\_ADS\_Persistance\_Retroactive.git]{.underline}](https://github.com/Abhijeet399/Project_ADS_Persistance_Retroactive.git)
 
-cd Partial_Persistance_Stacks
+-   cd Partial\_Persistance\_Stacks
 
-**Compile the files**:
-javac Partial_Persistance_Stacks/*.java
+**Compile the files**:\
+javac Partial\_Persistance\_Stacks/\*.java
 
-**Run the program**:
-java Partial_Persistance_Stacks.Client$Main
+**Run the program**:\
+java Partial\_Persistance\_Stacks.Client\$Main\
+\
+Note: Client\$Main is required because Main is a nested class inside Client.
 
-Note: Client$Main is required because Main is a nested class inside Client.
-
-**Persistent Retroactive Banking System
+**Persistent Retroactive Banking System\
 **
 
 This is a Django-based web application that simulates a fully retroactive and partially persistent banking system. It allows users to:
 
-Create accounts with an initial balance
+-   Create accounts with an initial balance
 
-Perform **deposits**, **withdrawals**, and **transfers**
+-   Perform **deposits**, **withdrawals**, and **transfers**
 
-Add operations retroactively by specifying a timestamp
+-   Add operations retroactively by specifying a timestamp
 
-View balances at any past version (timestamp)
+-   View balances at any past version (timestamp)
 
-Retroactively **insert** or **rollback** operations by timestamp and type
+-   Retroactively **insert** or **rollback** operations by timestamp and type
 
 The backend is powered by a custom **PersistentRetroactiveAccountSystem** class that simulates partial persistence and partial retroactivity in memory.
 
 **Implementation**
 
-**Backend Class: **PersistentRetroactiveAccountSystem
+-   **Backend Class:** PersistentRetroactiveAccountSystem
 
-Keeps an operations list of tuples: (timestamp, operation_type, data)
+```{=html}
+<!-- -->
+```
+-   Keeps an operations list of tuples: (timestamp, operation\_type, data)
 
-All operations (create, deposit, withdraw, transfer, rollback) are versioned.
+-   All operations (create, deposit, withdraw, transfer, rollback) are versioned.
 
-Balances are recalculated using historical simulation (get_balance()).
+-   Balances are recalculated using historical simulation (get\_balance()).
 
-Rollback removes only the specified operation.
+-   Rollback removes only the specified operation.
 
 **Web Interface**
 
-Built using Django
+-   Built using Django
 
-Views handle GET requests with optional timestamps
+-   Views handle GET requests with optional timestamps
 
-Balances are dynamically computed using versioned history
+-   Balances are dynamically computed using versioned history
 
 **Steps to Import and run the application**
 
 **Clone the Repository**
 
-git clone
+git clone [[https://github.com/Abhijeet399/Project\_ADS\_Persistance\_Retroactive.git]{.underline}](https://github.com/Abhijeet399/Project_ADS_Persistance_Retroactive.git)
 
 cd persistent-retroactive-transactions
 
 **Installation Instructions**
 
-Manually install Django:  pip install Django (preferably version >=4)
+Manually install Django: pip install Django (preferably version \>=4)
 
 **Run the Web Application**
 
-*1. Run Migrations*** **
+*1. Run Migrations*
 
 python manage.py migrate
 
@@ -585,138 +615,149 @@ python manage.py runserver
 
 Open a browser and go to:
 
+[[http://127.0.0.1:8000/]{.underline}](http://127.0.0.1:8000/)
+
 **Sample Use Case to Try**
 
-Create accounts:
+-   Create accounts:
 
-Create user1 with a balance of 120 at t0
+    -   Create user1 with a balance of 120 at t0
 
-Create user2 with a balance of 520 at t1
+    -   Create user2 with a balance of 520 at t1
 
-Deposit to user1:
+-   Deposit to user1:
 
-Deposit 120 to user1 at t2
+    -   Deposit 120 to user1 at t2
 
-Withdraw from user2:
+```{=html}
+<!-- -->
+```
+-   Withdraw from user2:
 
-Withdraw 30 from user2 at t3
+    -   Withdraw 30 from user2 at t3
 
-Transfer:
+-   Transfer:
 
-Transfer 50 from user2 to user1 at t4
+    -   Transfer 50 from user2 to user1 at t4
 
-Retroactive Operation:
+```{=html}
+<!-- -->
+```
+-   Retroactive Operation:
 
-Withdraw 50 from user1 at t2 (retroactively)
+    -   Withdraw 50 from user1 at t2 (retroactively)
 
-View Balance:
+```{=html}
+<!-- -->
+```
+-   View Balance:
 
-Go to View Balances and enter timestamp 2
+    -   Go to View Balances and enter timestamp 2
 
 You should see:
 
-user1: 120 (initial) + 120 (deposit) - 50 (withdraw) = 190
+-   user1: 120 (initial) + 120 (deposit) - 50 (withdraw) = 190
 
-user2: 520 (no change by t2) = 520
+-   user2: 520 (no change by t2) = 520
 
 Rollback a specific operation:
 
 Enter:
 
-Timestamp: 2
+-   Timestamp: 2
 
-Operation: withdraw
+-   Operation: withdraw
 
 This will undo only the withdraw operation at t2 without touching future operations.
 
-### Modified Persistent Retroactive Queue (Experimental Merge Version)
+### **Modified Persistent Retroactive Queue (Experimental Merge Version)**
 
-This Python program implements a Modified Persistent Retroactive Queue just like seen previously, supporting advanced retroactive queue operations and version tracking. It allows retroactive enqueue and dequeue operations, as well as viewing the queue's state at any version or timestamp but it also attempts to provide a **merge feature** to combine two historical versions into a new one.
+This Python program implements a Modified Persistent Retroactive Queue just like seen previously, supporting advanced retroactive queue operations and version tracking. It allows retroactive enqueue and dequeue operations, as well as viewing the queue\'s state at any version or timestamp but it also attempts to provide a **merge feature** to combine two historical versions into a new one.
 
 **Status**
 
-**Remains**** In Progress – Merge Functionality Under Development!!!**
+**Remains In Progress -- Merge Functionality Under Development!!!**
 
 **Features**
 
-Supports retroactive insertions/removals via timestamped nodes.
+-   Supports retroactive insertions/removals via timestamped nodes.
 
-Maintains a versioned history of the queue using deep copies.
+-   Maintains a versioned history of the queue using deep copies.
 
-Tracks modifications (enqueue_mods, dequeue_mods) at each timestamped node.
+-   Tracks modifications (enqueue\_mods, dequeue\_mods) at each timestamped node.
 
-Allows querying queue state at any version or timestamp.
+-   Allows querying queue state at any version or timestamp.
 
-Includes a merge function to combine operations from two versions.
+-   Includes a merge function to combine operations from two versions.
 
 **Known Issues**
 
-Incorrect output after merging versions.
+-   Incorrect output after merging versions.
 
-**Example**
+**Example**\
+\
+State at version 8: \[25, 20, 35, 30, 40\]
 
-State at version 8: [25, 20, 35, 30, 40]
-
-State at version 4: [10, 15, 20, 30, 40]
+State at version 4: \[10, 15, 20, 30, 40\]
 
 Merged version created at index 9
 
-State at version 9: [30, 30, 40, 40]  # Incorrect we’ve got duplicates & missing elements
+State at version 9: \[30, 30, 40, 40\] \# Incorrect we've got duplicates & missing elements
 
 **Expected Output**
 
 **Final queue after all operations (merged with later dequeue ops):**
 
-Start with [10, 15, 25, 20, 35, 30, 40]
-Apply dequeues from version 8 (in order):
-Dequeue 1: removes 10
-Dequeue 2: removes 15
-Final result with deque: **[25, 20, 35, 30, 40]**
+Start with \[10, 15, 25, 20, 35, 30, 40\]\
+Apply dequeues from version 8 (in order):\
+Dequeue 1: removes 10\
+Dequeue 2: removes 15\
+Final result with deque: **\[25, 20, 35, 30, 40\]**
 
-**Final queue after all enqueue operations (merged without later dequeue ops):**
-Final result:  **[10, 15, 25, 20, 35, 30, 40]**
+**Final queue after all enqueue operations (merged without later dequeue ops):**\
+Final result: **\[10, 15, 25, 20, 35, 30, 40\]**
 
 **Issues**
 
-Incorrectly merged node operations without properly considering their timestamps and sequence
+-   Incorrectly merged node operations without properly considering their timestamps and sequence
 
-Failed to properly track which items should be dequeued
+-   Failed to properly track which items should be dequeued
 
-In our merge function, we were trying to use sets to eliminate duplicate pointers, but Node objects can't be properly compared that way.
+-   In our merge function, we were trying to use sets to eliminate duplicate pointers, but Node objects can\'t be properly compared that way.
 
-After merging two versions, the pointers need to be reconstructed to maintain the correct linked structure.
+-   After merging two versions, the pointers need to be reconstructed to maintain the correct linked structure.
 
-When making deep copies, the pointers are referring to the old Node objects, not the newly created ones in the merged version.
+-   When making deep copies, the pointers are referring to the old Node objects, not the newly created ones in the merged version.
 
 **Requirements**
 
-Python 3.6+
+-   Python 3.6+
 
-Uses the following standard libraries:
+-   Uses the following standard libraries:
 
-bisect for efficient sorted insertions
+    -   bisect for efficient sorted insertions
 
-collections.deque for fast front-element removals
+    -   collections.deque for fast front-element removals
 
-copy for deep-copying node state**
+copy for deep-copying node state**\
 **
 
 **Next Steps / To-Do**
 
-Perhaps removing the retroactive aspect to simplify the merging of the versions.
+-   Perhaps removing the retroactive aspect to simplify the merging of the versions.
 
-Refactor merge_versions() to:
+-   Refactor merge\_versions() to:
 
-Properly merge operations in correct chronological order.
+    -   Properly merge operations in correct chronological order.
 
-Avoid duplicates and restore queue semantics.
+    -   Avoid duplicates and restore queue semantics.
 
-Correctly rebuild pointer references across merged nodes.
+    -   Correctly rebuild pointer references across merged nodes.
 
-Separate mod merging from pointer management for clarity.
+-   Separate mod merging from pointer management for clarity.
 
-Introduce unit tests to validate correctness of versions and merge output.**
-**
+-   Introduce unit tests to validate correctness of versions and merge output.**\
+    > **
 
 **License**
 
